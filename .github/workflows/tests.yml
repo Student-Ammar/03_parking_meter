@@ -1,0 +1,55 @@
+# PRESENTATION NOTES
+# What this does: runs pytest automatically on GitHub when relevant code
+# changes. Advanced feature: it avoids unnecessary runs (see the notes below).
+
+name: Run pytest
+
+on:
+  # 1. Push trigger: only on main, so a feature branch is not tested twice
+  #    (once on push and again on its pull request).
+  push:
+    branches: [main]
+    # 2. paths filter: only run when code or config changes.
+    #    Editing a README or a docx will NOT start a run.
+    paths:
+      - "**.py"
+      - "requirements.txt"
+      - "pytest.ini"
+      - ".github/workflows/tests.yml"
+  # 3. Pull request trigger: feature-branch changes are tested here,
+  #    before they are merged into main.
+  pull_request:
+    branches: [main]
+    paths:
+      - "**.py"
+      - "requirements.txt"
+      - "pytest.ini"
+      - ".github/workflows/tests.yml"
+
+# 4. concurrency: if a newer run starts for the same branch/PR, cancel the
+#    older one. This saves time when I push several commits quickly.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    # Run on a fresh Ubuntu machine provided by GitHub.
+    runs-on: ubuntu-latest
+    steps:
+      # Download my repo code onto the machine.
+      - uses: actions/checkout@v4
+
+      # Install Python. cache: pip reuses downloaded packages, so later
+      # runs install faster.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # Install pytest (listed in requirements.txt).
+      - run: pip install -r requirements.txt
+
+      # Run all tests. -v shows each test name and its PASSED/FAILED result.
+      # Expect red: 8 tests fail because of the bugs in the source code.
+      - run: pytest -v
