@@ -1,4 +1,4 @@
-# demo change
+
 """Unit tests for parking_fee.calculate_parking_fee (Spec 3.1).
 
 Each test maps to a test case ID in the Test Case Specification (PM-TCS).
@@ -85,10 +85,3 @@ def test_fee_012_non_numeric_minutes_raises_type_error(minutes):
 def test_fee_013_bool_minutes_raises_type_error(minutes):
     with pytest.raises(TypeError):
         calculate_parking_fee(minutes)
-# change 1
-# change 2
-# change 1
-# change 2
-# c1
-# c2
-# c3
