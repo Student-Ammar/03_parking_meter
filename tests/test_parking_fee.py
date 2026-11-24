@@ -11,7 +11,7 @@ from parking_fee import calculate_parking_fee
 
 # ---------- Valid inputs (Req 3.1.1, 3.1.2) ----------
 
-# Checks: zero minutes. Expected: charge is 0. 67
+# Checks: zero minutes. Expected: charge is 0. 
 def test_fee_001_zero_minutes_costs_zero():
     assert calculate_parking_fee(0) == 0 
 
