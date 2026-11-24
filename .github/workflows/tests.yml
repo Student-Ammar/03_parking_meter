@@ -50,6 +50,11 @@ jobs:
       # Install pytest (listed in requirements.txt).
       - run: pip install -r requirements.txt
 
+      # TEMPORARY (demo only): sleep 30s so each run lasts ~30s, making the
+      # concurrency cancel-in-progress behaviour visible in the Actions tab.
+      # REMOVE THIS STEP after the demo.
+      - run: sleep 30
+
       # Run all tests. -v shows each test name and its PASSED/FAILED result.
       # Expect red: 8 tests fail because of the bugs in the source code.
       - run: pytest -v

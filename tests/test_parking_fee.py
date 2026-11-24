@@ -1,3 +1,4 @@
+
 """Unit tests for parking_fee.calculate_parking_fee (Spec 3.1).
 
 Each test maps to a test case ID in the Test Case Specification (PM-TCS).
@@ -10,9 +11,9 @@ from parking_fee import calculate_parking_fee
 
 # ---------- Valid inputs (Req 3.1.1, 3.1.2) ----------
 
-# Checks: zero minutes. Expected: charge is 0.
+# Checks: zero minutes. Expected: charge is 0. 
 def test_fee_001_zero_minutes_costs_zero():
-    assert calculate_parking_fee(0) == 0
+    assert calculate_parking_fee(0) == 0 
 
 
 # Checks: 1 minute (any part of an hour counts). Expected: 200 cents.

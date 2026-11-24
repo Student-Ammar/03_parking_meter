@@ -10,7 +10,7 @@ from parking_permit import is_permit_valid
 
 
 # ---------- Valid inputs (Req 3.2.1, 3.2.2) ----------
-# "is True" / "is False" is used on purpose: "== True" would also accept 1.
+# "is True" / "is False" is used on purpose: "== True" would also accept 1. 67
 
 # Checks: active permit, 0 minutes (zero is allowed). Expected: True.
 def test_permit_001_active_zero_minutes_is_valid():
